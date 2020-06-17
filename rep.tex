@@ -1,0 +1,104 @@
+
+%%%%%
+% To do all:
+% VisIt footnote, I-NERI->INERI, cross-(!)section, exact Re&Reh, Specs citation/table? Fig->Figure, MYRRHA
+
+\documentclass[11pt,letterpaper]{report}
+
+\input preambl
+
+%\usepackage[title,titletoc]{appendix}	%?
+%\renewcommand{\appendixname}{Appendix}
+%%\usepackage[toc,page]{appendix}
+%\usepackage{sectsty}   % for smaller chapter/appendix
+%\chapternumberfont{\fontsize{12}{14}\selectfont}  % for 11pt option with \chapter/Appendix?
+%\chaptertitlefont{\fontsize{12}{14}\selectfont}
+
+\renewcommand{\bibname}{References}
+
+\title{An Update on Cardinal: Toward full core pebble simulations}
+
+
+\author[2]{\rm Elia Merzari}
+\author[3]{\rm Derek Gaston}
+\author[1]{\rm Ronald Rahaman}
+\author[2]{\rm Patrick Shriwise}
+\author[2]{\rm Haomin Yuan}
+
+\affil[1]{Mathematics and Computer Science Division, Argonne National Laboratory }
+\affil[2]{Nuclear Science and Engineering Division, Argonne National Laboratory }
+\affil[3]{Idaho National Laboratory}
+
+\publicationdate{May 31, 2020}
+\report_no{ANL/}
+
+\begin{document}
+
+\maketitle
+\clearpage
+\thispagestyle{empty}
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+
+
+%% =========
+\graphicspath{{./Figs/}}
+
+\input execsum
+
+\addcontentsline{toc}{section}{Executive Summary}
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\counterwithout{section}{chapter}  % \usepackage{chngcntr} %?
+
+%% =========
+
+\input intro
+\setcounter{section}{1}
+
+\input cardinal
+\input nekrs
+\input openmc
+\input demo
+
+%%\input misc
+
+%\afterpage{\clearpage}
+
+\input concl
+
+%\clearpage
+
+\section*{Acknowledgments}
+\addcontentsline{toc}{section}{Acknowledgments}
+
+Argonne National Laboratory's work was supported by the U.S. Department of Energy, Office of Nuclear Energy, Nuclear Energy Advanced Modeling and Simulation (NEAMS), under contract DE-AC02-06CH11357.
+
+
+%\afterpage{\clearpage}
+
+\bibliographystyle{unsrt}
+%% =========
+\bibliography{references}
+\addcontentsline{toc}{section}{References}
+
+\newpage
+%%\usepackage[toc,page]{appendix}	%?
+%%\usepackage[toc]{appendix}
+%\appendix
+%\renewcommand\thesection{Appendix \Alph{section}}
+%%
+%\section{Other PLANDTL Figures}
+%\addcontentsline{toc}{section}{Other PLANDTL Figures}
+
+%\input appx %?
+
+%\includepdf[pages=-]{rep_61specs_not.pdf}
+
+
+\newpage
+\endpage
+
+\end{document}

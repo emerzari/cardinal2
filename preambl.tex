@@ -1,0 +1,88 @@
+%\usepackage{graphics}
+\usepackage{graphicx}
+%\usepackage{subfig}	% conflicts w/ Dillon?
+\usepackage{float}
+\usepackage{comment}
+\usepackage{amssymb,amsmath}
+\usepackage{rotating}
+\usepackage{tabularx}
+
+\usepackage{pdfpages}
+\usepackage{afterpage}
+
+\usepackage{wrapfig}
+
+\usepackage{microtype}
+\usepackage{fullpage}
+
+\usepackage{bm}  % Dillon
+\usepackage{caption} 
+\usepackage{subcaption} 
+
+%\usepackage{url}
+%\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{
+  colorlinks   = true, %Colours links instead of ugly boxes
+  urlcolor     = blue, %Colour for external hyperlinks
+  linkcolor    = blue, %Colour of internal links
+  citecolor   = blue, %Colour of citations
+%  pdfborderstyle={/S/U/W 1} % border style will be underline of width 1pt
+}
+
+%%% epstopdf
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+   \pdffalse
+\else
+   \pdfoutput=1
+   \pdftrue
+\fi
+\ifpdf
+   \usepackage[update,prepend]{epstopdf}
+   \DeclareGraphicsRule{.eps}{pdf}{.pdf}{`epstopdf #1}
+   \pdfcompresslevel=9
+\fi
+%%%
+
+\usepackage{authblk}
+\usepackage{chngcntr}
+\usepackage{mcs_pack}
+
+\DeclareGraphicsExtensions{.gif,.png,.jpg,.pdf,.tiff,.eps}	% pdflatex % .eps for pdf only w/ \epsfig? 
+%\DeclareGraphicsExtensions{.eps} 		% latex
+
+\def\baselinestretch{1.0}
+\textwidth 6.5in
+\textheight 8.50in
+\topmargin -0.15in
+\parskip   0.05in
+\oddsidemargin 0.0in
+\parindent 5ex
+\renewcommand{\topfraction}{.95}
+\renewcommand{\bottomfraction}{.95}
+\renewcommand{\textfraction}{.05}
+
+
+%
+%  Input the psfig macros...
+%
+%\input psfig
+\input pf
+
+\def\VI{\bold{v}}
+
+
+%\usepackage{amsmath,amssymb,amsfonts,amsthm}
+% \usepackage{amsfonts}
+% \usepackage{amsmath}
+%\usepackage{amscd}
+%\usepackage{latexsym}
+%\usepackage{graphicx}
+%\usepackage{epsfig}
+%\usepackage{wrapfig}
+%
+\newcommand{\projectname}{SHARP Thermal-Hydraulics}
+%
+% \input jl1  %% JL HEADER INFO FROM apm2 directory
+
