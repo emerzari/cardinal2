@@ -33,7 +33,9 @@ A mesh for each pebble is applied in the Cardinal problem to capture the heat ge
     \label{fig:umesh_tally_steup}
 \end{figure}
 
-The translation values for each mesh filter are set using the list of pebble centers provided in the MOOSE input file. During problem initialization, these translations are used to adjust the location of element centers in the mesh template when transferring heat generation value to MOOSE. Element volumes can be determined directly from the As the only additional input information required for the unstructured mesh tallies is the specification of a mesh template input file, the unstructured mesh tallies can be specified at runtime by setting the appropriate tally type parameter in the OpenMC MOOSE input file.
+The translation values for each mesh filter are set using the list of pebble centers provided in the MOOSE input file. During problem initialization, these translations are used to adjust the location of element centers in the mesh template when transferring heat generation value to MOOSE.
+% Element volumes can be determined directly from the 
+As the only additional input information required for the unstructured mesh tallies is the specification of a mesh template input file, the unstructured mesh tallies can be specified at runtime by setting the appropriate tally type parameter in the OpenMC MOOSE input file.
 
 \subsection{Updating Temperature Values}
 

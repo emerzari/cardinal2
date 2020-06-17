@@ -27,7 +27,7 @@ We note that 1568 pebbles is a significant size for a coupled calculation and re
 \end{figure}
 
 For this demonstrations, the sizes and composition of the TRISO particles were based on TRISO manufactured
-at INL, following the practice established in the previous report \cite{cardinal}. Though these particles were developed for the Advanced Gas Reactor (AGR) fuel, particles with the same specifications are used for FHR test reactors and computations benchmarks. The sizes and compositions of the pebbles were taken from the Mark-1 FHR reactor constructed at UC Berkeley.
+at INL, following the practice established in the previous report \cite{cardinal}. Though these particles were developed for the Advanced Gas Reactor (AGR) fuel, particles with the same specifications are used for FHR test reactors and computation benchmarks. The sizes and compositions of the pebbles were taken from the Mark-1 FHR reactor constructed at UC Berkeley.
 
 For BISON, and the demonstration problem under consideration we consider only the conduction equation and as such it is a relatively straightforward setup. Properties are constant and adapted from available correlations. The mesh for a single sphere is generated and replicated at run time. The same mesh is used for the mesh tallies in OpenMC.
 
@@ -37,7 +37,7 @@ The model described in the previous section has been run on 12 and 20 nodes of S
 
 Stand-alone NekRS simulations have been run first up to 25 convective time units to develop turbulence - Figure~\ref{f:ndemo3} using a Large Eddy Simulation (LES) approach.
 
- A restart file has then been generated and used to restart a transient simulation in Cardinal representing an heat-up of the pebbles. The time step has been fixed to $5*10^-4 s$ in both BISON and NekRS. The temperature at time zero has been set to 300 C everywhere. Figure~\ref{f:ndemo4} presents the temperature at the surface of the pebbles in BISON at three points in time. The simulations took 2.5s per coupled time step on 20 nodes, requiring transfer between physics at each time step. However this could be greatly optimized by relaxing the requirement, as data transfer from GPU to CPU should be minimized as much as possible.
+ A restart file has then been generated and used to restart a transient simulation in Cardinal representing an heat-up of the pebbles. The time step has been fixed to $5(10^{-4})$s in both BISON and NekRS. The temperature at time zero has been set to 300 C everywhere. Figure~\ref{f:ndemo4} presents the temperature at the surface of the pebbles in BISON at three points in time. The simulations took 2.5s per coupled time step on 20 nodes, requiring transfer between physics at each time step. However this could be greatly optimized by relaxing the requirement, as data transfer from GPU to CPU should be minimized as much as possible.
 
 \begin{figure}[!h]
 \centering
