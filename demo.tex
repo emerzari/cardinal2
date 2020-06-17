@@ -54,6 +54,32 @@ Stand-alone NekRS simulations have been run first up to 25 convective time units
 \label{f:ndemo4}
 \end{figure}
 
+The results of OpenMC simulations coupled with the heat conduction module are shown in Figures ~\ref{f:1568_openmc_heat_source} and ~\ref{f:1568_openmc_temperatures} with the same time step parameters as in the NekRS simulations described above. An eigenvalue simulation using 50,000 particles in 150 batches with 50 inactive batches was performed in each time step. While the eigenvalue in this simulation is well-converged (to within 20 pcm), the unstructured mesh heat source contains more noise than the pebble-averaged heat source due to the smaller number of samples per bin in the tally. Production simulations may require a higher number of particles per batch to more tightly converge the heating distribution when using the unstructured mesh tally source. Figure~\ref{f:1568_openmc_temperatures_single_pebble} demonstrates the effect of the improved spatial resolution provided by the unstructured mesh heat source from OpenMC on the temperature distribution within a representative pebble. In the case of the pebble-averaged heat source the temperature profile is nearly perfectly symmetric, reflecting the uniform heat source applied in that region, while an asymmetry can be seen in the profile generated from the unstructured mesh heat source indicating that the distribution of this source has an impact on the temperature distribution in the solid and resulting heat transfer to the fluid.
+
+\begin{figure}[!h]
+\centering
+\includegraphics[clip=true,width=0.48\textwidth]{Figures/openmc_cell_heat_source}
+\includegraphics[clip=true,width=0.48\textwidth]{Figures/openmc_mesh_heat_source}
+\caption{Left: Heat source using the original cell tallies to produces an average heat source per-pebble. Right: Heat source produced using an OpenMC unstructured mesh tally.}
+\label{f:1568_openmc_heat_source}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[clip=true,width=0.48\textwidth]{Figures/openmc_cell_temperature}
+\includegraphics[clip=true,width=0.48\textwidth]{Figures/openmc_mesh_temperature}
+\caption{Left: Temperature in the solid resulting from the cell-based heating tally. Right: Temperature in the solid resulting from the unstructured mesh heating tally in OpenMC.}
+\label{f:1568_openmc_temperatures}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[clip=true,width=0.48\textwidth]{Figures/openmc_cell_temperature_zoomed}
+\includegraphics[clip=true,width=0.48\textwidth]{Figures/openmc_mesh_temperature_zoomed}
+\caption{Temperature profiles of the same pebble in the 1568 pebble demo using the pebble-averaged heating (left) and the unstructured mesh heating (right).}
+\label{f:1568_openmc_temperatures_single_pebble}
+\end{figure}
+
 \subsection{Projection to full core}
 
 20 nodes of Summit represents less than 1\% of the computing power available on Summit. We estimate that 80\% of the machine will be sufficient to perform full core calculation in FHRs corresponding to 300,000 pebbles.
