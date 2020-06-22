@@ -54,7 +54,26 @@ Stand-alone NekRS simulations have been run first up to 25 convective time units
 \label{f:ndemo4}
 \end{figure}
 
-The results of OpenMC simulations coupled with the heat conduction module are shown in Figures ~\ref{f:1568_openmc_heat_source} and ~\ref{f:1568_openmc_temperatures} with the same time step parameters as in the NekRS simulations described above. An eigenvalue simulation using 50,000 particles in 150 batches with 50 inactive batches was performed in each time step. While the eigenvalue in this simulation is well-converged (to within 20 pcm), the unstructured mesh heat source contains more noise than the pebble-averaged heat source due to the smaller number of samples per bin in the tally. Production simulations may require a higher number of particles per batch to more tightly converge the heating distribution when using the unstructured mesh tally source. Figure~\ref{f:1568_openmc_temperatures_single_pebble} demonstrates the effect of the improved spatial resolution provided by the unstructured mesh heat source from OpenMC on the temperature distribution within a representative pebble. In the case of the pebble-averaged heat source the temperature profile is nearly perfectly symmetric, reflecting the uniform heat source applied in that region, while an asymmetry can be seen in the profile generated from the unstructured mesh heat source indicating that the distribution of this source has an impact on the temperature distribution in the solid and resulting heat transfer to the fluid.
+The results of OpenMC simulations coupled with the heat conduction module are
+shown in Figures ~\ref{f:1568_openmc_heat_source} and
+~\ref{f:1568_openmc_temperatures} with the same time step parameters as the
+NekRS simulations described above. An eigenvalue simulation using 150 batches
+with 50 inactive batches was executed in each time step. 50,000 particles per
+batch were used to converge the pebble-averaged heat source from the OpenMC cell
+tally while the unstructured mesh heat source tally required 500,000 particles
+per batch to produce the heat source presented here. Production simulations may
+require a an even higher number of particles per batch to more tightly converge
+the heating distribution when using the unstructured mesh heat source due to the
+decreased number of samples per source particle in the tally bins.
+Figure~\ref{f:1568_openmc_temperatures_single_pebble} demonstrates the effect of
+the improved spatial resolution provided by the unstructured mesh heat source
+from OpenMC on the temperature distribution within a representative pebble. In
+the case of the pebble-averaged heat source the temperature profile is
+symmetric, reflecting the uniform heat source applied in that region, while an
+asymmetry can be seen in the profile generated from the unstructured mesh heat
+source indicating that the improved spatial resolution of the source has an
+impact on the temperature distribution in the solid and will in turn affect the
+resulting heat transfer to the fluid.
 
 \begin{figure}[!h]
 \centering
