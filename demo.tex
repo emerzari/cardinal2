@@ -2,15 +2,80 @@
 \section{Demonstration simulation}
 \label{s:demo}
 
-To demonstrate the new capability of Cardinal we demonstrate here the use of Cardinal on Summit to perform coupled multi-physics simulations of pebble beds.
+To demonstrate the new capability of Cardinal we demonstrate here the use of
+Cardinal on Summit to perform coupled multi-physics simulations of pebble beds.
 
 \subsection{Numerical Setup}
 
-The case presented here comprises 1568 pebbles. The pebble configuration has been obtained using a discrete element method (DEM) code. A major overhaul on the mesh generation  for the fluid domain has been necessary to automatize as much as possible the process and reduce the number of elements per pebble. The new meshing tool is based on a Voronoi cell strategy. It has allowed to produce high quality hexahedral meshes, while reducing the mesh count to roughly 300-400 elements per pebble.
+The case presented here comprises 1568 pebbles. The pebble configuration has
+been obtained using a discrete element method (DEM) code. A major overhaul on
+the mesh generation for the fluid domain has been necessary to automatize as
+much as possible the process and reduce the number of elements per pebble. The
+new meshing tool is based on a Voronoi cell strategy. It has allowed to produce
+high quality hexahedral meshes, while reducing the mesh count to roughly
+300-400 elements per pebble.
 
-Examples for these meshes are provided in Figure~\ref{f:ndemo1} for the 1568 pebble configuration and in Figure~\ref{f:ndemo2} for a pebble configuration with over 3,000 pebbles. Both meshes have a similar density.
+Examples for these meshes are provided in Figure~\ref{f:ndemo1} for the 1568
+pebble configuration and in Figure~\ref{f:ndemo2} for a pebble configuration
+with over 3,000 pebbles. Both meshes have a similar density.
+We note that 1568 pebbles is a significant size for a coupled calculation and
+representative for instance of the SANA experiments.
 
-We note that 1568 pebbles is a significant size for a coupled calculation and representative for instance of the SANA experiments.
+The principal objective of the new meshing strategy is to reduce the 
+overall element count so that higher polynomial orders (e.g., $N=7$
+to 9) may be effectively employed.   The base elements for the 
+spectral element method are curvilinear hexahedral (hex) elements
+with and effective resolution of $N^3$ points for each of $E$ elements.
+A minimum value of $n \approx EN^3$ is required to capture the turbulent
+thermal transport.  With a lower element count, $E$, it is possible to
+elevate the local approximation order.  $N=7$ is a nearly optimal value
+for Nek5000/NekRS because it realizes high throughput with reasonable 
+element counts and reasonable timestep sizes \cite{fischer20a}.
+
+The foundation for the new all-hex meshing strategy is to construct
+the Voronoi tesselation of the thermal-fluid domain in the void space
+between the spheres and vessel walls.  The Voronoi tesselation has
+several important properties:
+\begin{itemize}
+  \item Each Voronoi cell is convex and closed, with cell walls formed
+        by facets that bisect the line connecting adjacent sphere centers.
+  \item Each facet is a planar convex polygon.
+  \item For $\cal N$ spheres, Voronoi tesselation has an expected 
+        complexity of $O(\cal N)$.  
+\end{itemize}
+Each convex polygon can be tesselated into a set of quadrilaterals
+if we permit insertion of a vertex along edges.  For example, if the
+facet is a triangle, we insert a vertex on each of the three
+edges and then subdivide the triangle into three quads.  Each of these
+quads can be projected onto the sphere surface to produce a hex element
+that connects the surface to the Voronoi-cell facet.  For a given
+sphere, one can refine in the radial direction without having the
+refinement propagate through the domain.  The same procedure
+can be performed for each Voronoi cell (i.e., sphere), so the 
+overall complexity is ($O(\cal N)$).
+
+Despite the provably good properties of this approach, a significant concern is
+that the Voronoi tesselation my still contain very thin facets (i.e., {\em
+slivers}) that lead to poorly conditioned elements.  To overcome this and to
+generate a more uniform mesh that has a bounded ratio of longest to shortest
+edge we first perform edge collapse on the Voronoi cells.  Any edge that is
+shorter than a given tolerance is collaped and its two vertices are fused into
+one.  If, after edge collapse, the number of edges on a facet is $<$ 3, the
+facet is deleted.   Subsequent to edge collapse, we use {\em vertex insertion}
+to ensure that the {\em longest} edge is below a certain threshold.
+The risk of edge collapse is that facets lose their planarity and, worse,
+might not actually face the sphere that they are nominally bounding.
+These situations require some care to recover to ensure that the 
+resulting all-hex mesh has valid positive Jacobians for each element.
+
+Once the mesh is constructed, it is smoothed using a combination of Laplacian
+smoothing and element-Jacobian optimization where the objective function
+includes a substantial penalty for negative Jacobians.
+
+
+
+
+
 
 \begin{figure}[!h]
 \centering
