@@ -8,12 +8,12 @@ Cardinal on Summit to perform coupled multi-physics simulations of pebble beds.
 \subsection{Numerical Setup}
 
 The case presented here comprises 1568 pebbles. The pebble configuration has
-been obtained using a discrete element method (DEM) code. A major overhaul on
-the mesh generation for the fluid domain has been necessary to automatize as
-much as possible the process and reduce the number of elements per pebble. The
-new meshing tool is based on a Voronoi cell strategy. It has allowed to produce
-high quality hexahedral meshes, while reducing the mesh count to roughly
-300-400 elements per pebble.
+been obtained using a discrete element method (DEM) code~\cite{projectChronoWebSite}. 
+A major overhaul on the mesh generation for the fluid domain has been necessary 
+to automatize as much as possible the process and reduce the number of elements 
+per pebble. The new meshing tool is based on a Voronoi cell strategy. 
+It has allowed to produce high quality hexahedral meshes, while reducing the mesh 
+count to roughly 300-400 elements per pebble.
 
 Examples for these meshes are provided in Figure~\ref{f:ndemo1} for the 1568
 pebble configuration and in Figure~\ref{f:ndemo2} for a pebble configuration
@@ -80,14 +80,14 @@ includes a substantial penalty for negative Jacobians.
 \begin{figure}[!h]
 \centering
 \includegraphics[clip=true,width=0.9\textwidth]{Figures/ndemo_r1}
-\caption{NekRS Mesh for 1568 pebble configuration}
+\caption{NekRS mesh for 1568 pebble configuration using 524,386 spectral elements. }
 \label{f:ndemo1}
 \end{figure}
 
 \begin{figure}[!h]
 \centering
 \includegraphics[clip=true,width=0.9\textwidth]{Figures/ndemo_r2}
-\caption{NekRS Mesh for 3260 pebble configuration}
+\caption{NekRS Mesh for 3260 pebble configuration using 1,121,214 spectraal elements}
 \label{f:ndemo2}
 \end{figure}
 
