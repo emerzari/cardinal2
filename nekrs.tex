@@ -16,7 +16,7 @@ We observe in Table~\ref{wscaling} near-perfect weak-scaling performance up to 2
 We note that the performance falls off for GPUs when decreasing the degree of freedom (DOF) per GPU.  
 %%Therefore, strong-scaling studies are not particularly meaningful. 
 %%Future large scale calculations will likely suffer from even longer runtimes. 
-These performance results are in keeping with earlier performance analysis presented in \cite{fischer15,min2015a}. .
+These performance results are in keeping with earlier performance analysis presented in \cite{fischer15,min2015a}.
 
 \begin{table} [!b]
 \begin{center} \begin{tabular}{ccc}
@@ -31,7 +31,7 @@ These performance results are in keeping with earlier performance analysis prese
 \caption{\label{wscaling} Weak-scaling on Summit. 8,000 elements per GPU, $N=7$.}
 \end{table}
 
-We also compare the GPU performances of NekRS with the CPU performance of Nek5000 on Summit using 1,024 nodes. The CPU simulation was performed with 42 MPI ranks per node, and the GPU simulation was performed with 6 GPUs  per node. Overall the NekRS GPU solver was 11.5 times faster than the standard Nek5000 CPU solver for the same number of nodes.
+We also compare the GPU performance of NekRS with the CPU performance of Nek5000 using 1,024 nodes on Summit. The CPU simulation was performed with 42 MPI ranks per node, and the GPU simulation was performed with 6 GPUs  per node. Overall the NekRS GPU solver was 11.5 times faster than the standard Nek5000 CPU solver for the same number of nodes.
 
 We note that NekRS shares a similar verification and validation basis with Nek5000.
 
