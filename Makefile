@@ -9,6 +9,7 @@ all:
 	bibtex $(name)
 	bibtex $(name)
 	pdflatex  --shell-escape $(name).tex
-	rm *.out *.bbl *.blg *.log *.aux *.spl
+pdf:
+	pdflatex  --shell-escape $(name).tex
 clean:
-	rm *.toc *.out *.bbl *.blg *.log *.aux *.spl *.pdf 
+	rm -f *.toc *.out *.bbl *.blg *.log *.aux *.spl *.pdf 
