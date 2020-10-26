@@ -2,14 +2,22 @@
 \section{Introduction}
 \label{s:intro}
 
-The DOE-NE Center of Excellence for Thermal-fluids applications in Nuclear Energy inaugurated in April 2018 considers and researches novel new solution strategies for historically challenging issues that still plague the current fleet of deployed Light Water Reactor (LWR) nuclear reactors as well as predicting various fluid flow and fluid related issues with advanced reactor technologies, which includes advanced Small Modular Reactor (SMR) concepts, micro-reactors, and Advanced Reactor Concepts (ARC), utilizing coolants such as liquid metal, chloride and  fluoride salts, or gas, for accident-tolerant reactors. These new solution strategies and algorithms will then be implemented into a modern software design methodology, using best software quality practices, and then delivering validated NQA-1 level software to the nuclear power community.
+The DOE-NE Center of Excellence for Thermal-fluids applications in Nuclear Energy inaugurated in April 2018 considers and researches novel new solution strategies for historically challenging issues that still plague the current fleet of deployed Light Water nuclear Reactors (LWR) as well as predicting various fluid flow and fluid related issues with advanced reactor technologies, which includes advanced Small Modular Reactor (SMR) concepts, micro-reactors, and Advanced Reactor Concepts (ARC), utilizing coolants such as liquid metal, chloride and  fluoride salts, or gas, for accident-tolerant reactors.
+These new solution strategies and algorithms will then be implemented into a modern software design methodology, using best software quality practices, and then delivering validated NQA-1 level software to the nuclear power community.
 
-Ultimately, this goal requires a facility where a strong collaborative environment can be established between computational scientists and scientists conducting fluid dynamic experiments. The center addresses a pressing need in advanced reactor development and commercialization. Advanced reactor fluid problems are currently high priority and lend themselves to advanced modeling and simulation due to the presence of complex flow and lack of empirical data. In fact, advanced modeling and simulation tools are poised to play an important role: providing deep insight, enhancing the experimental process and accelerating the regulatory process. The center supports a coherent approach, and establishes a true front door for engaging industry. The current approach makes it difficult for customers to engage - single-PI efforts, while individually excellent, have been somewhat disparate, and not coordinated. The CFD/Thermal-Hydraulic Center is truly a multi-lab approach analogous to that used in the very successful fuels M\&S area of NEAMS.
+Ultimately, this goal requires a facility where a strong collaborative environment can be established between computational scientists and scientists conducting fluid dynamic experiments.
+The center addresses a pressing need in advanced reactor development and commercialization.
+Advanced reactor fluid problems are currently a high priority and lend themselves to advanced modeling and simulation due to the presence of complex flow phenomena and lack of empirical data.
+In fact, advanced modeling and simulation tools are poised to play an important role: providing deep insight, enhancing the experimental process and accelerating the regulatory process.
+The center supports a coherent approach, and establishes a true front door for engaging industry.
+The current approach makes it difficult for customers to engage -- single-PI efforts, while individually excellent, have been somewhat disparate, and not coordinated.
+The CFD/Thermal-Hydraulic Center is truly a multi-lab approach analogous to that used in the very successful fuels M\&S area of NEAMS.
 
 NEAMS and Hub Thermal-Hydraulic/CFD tools are far enough along to warrant this approach.
-Our advanced thermal-fluids research and development approach synergistically combines three natural,
-though overlapping, length and time scales in a hierarchal multi-scale approach to avoid the temptation and
-pitfalls of attempting to develop a single solve all algorithm for physical fluid flow problems that will span $10^{9}$ in spatial and temporal scales. A more tractable approach is grouping physics with similar multi-scale requirements into a common algorithm, developing separate software applications to address the separate scales, and then coupling the applications where appropriate. This multi-scale modeling and simulation template has proven to be highly successful in the Nuclear Energy Advanced Modeling and Simulation (NEAMS) program to simulate the evolution of nuclear materials under irradiation. These three overlapping thermal-hydraulic scales are defined across all reactor concepts as:
+Our advanced thermal-fluids research and development approach synergistically combines three natural, though overlapping, length and time scales in a hierarchal multi-scale approach to avoid the temptation and pitfalls of attempting to develop a single solve-all algorithm for physical fluid flow problems that will span nine orders of magnitude in spatial and temporal scales.
+A more tractable approach is grouping physics with similar multi-scale requirements into a common algorithm, developing separate software applications to address the separate scales, and then coupling the applications where appropriate.
+This multi-scale modeling and simulation template has proven to be highly successful in the Nuclear Energy Advanced Modeling and Simulation (NEAMS) program to simulate the evolution of nuclear materials under irradiation.
+These three overlapping thermal-hydraulic scales are defined across all reactor concepts as:
 \begin{itemize}
     \item \textbf{Lower Length Scale.} The Lower Length Scale will focus upon resolving the high-resolution physics
     associated with single and multi-phase, highly turbulent conjugate heat transfer (CHT) with highly
@@ -17,27 +25,50 @@ pitfalls of attempting to develop a single solve all algorithm for physical flui
     \item \textbf{Engineering Length scale.} The Engineering Length Scale will integrate coarse mesh approaches
     for homogenized multi-dimensional CHT, such as those found in gas-cooled pebble-bed reactors, or three-dimensional sub-channel capabilities tightly coupled to nuclear fuels performance.
     \item \textbf{System Scale.} System Scale analysis for nuclear reactors is composed of one-dimensional fluid flow
-    pipe networks and zero-dimensional system components. These classes of algorithms and corresponding approaches are basically reduced order models (ROM) of the more complex scales and allow for more efficient calculations. These reduced order systems rely heavily on empirical correlations or models, as many of the flow features and phenomena are no longer resolved.
+    pipe networks and zero-dimensional system components.
+These classes of algorithms and corresponding approaches are basically reduced order models (ROM) of the more complex scales and allow for more efficient calculations.
+These reduced order systems rely heavily on empirical correlations or models, as many of the flow features and phenomena are no longer resolved.
 \end{itemize}
 
-To demonstrate the multi-scale philosophy of the center we focus first on Flouride Cooled High Temperature Reactors (FHRs), and in particular on the berkley's PB-FHR design Mark-I design. The Fluoride salt cooled High temperature Reactor (FHR) is a class of advanced nuclear reactors that combine the robust coated particle fuel form from high temperature gas cooled reactors, direct reactor auxiliary cooling system (DRACS) passive decay removal of liquid metal fast reactors, and the transparent, high volumetric heat capacitance liquid fluoride salt working fluids - Flibe - from molten salt reactors. This combination of fuel and coolant enables FHRs to operate in a high-temperature low-pressure design space that has beneficial safety and economic implications. In 2012, UC Berkeley was charged with developing a pre-conceptual design of a commercial prototype FHR - the Pebble Bed- Fluoride Salt Cooled High Temperature Reactor (PB-FHR) \cite{cisneros2014technical}. The Mark 1 design of the PB-FHR (Mk1 PB-FHR) is a 236 MWt Flibe cooled pebble bed nuclear heat source that drives an open-air Brayton combined-cycle power conversion system. The PB-FHR's pebble bed consists of a enriched uranium fuel core surrounded by an inert graphite pebble region that shields the outer solid graphite region, core barrel and reactor vessel. The fuel reaches an average burnup of 178000 MWt-d/MT. The Mk1 PB-FHR exhibits strong negative temperature reactivity feedback from the fuel, graphite moderator and the Flibe coolant but a small positive temperature reactivity feedback of the inner region and from the outer graphite pebble region. Pebble bed reactors are in a sense the poster child for the sort of analysis described above.
+To demonstrate the multi-scale philosophy of the center we focus first on Fluoride Cooled High Temperature Reactors (FHRs), and in particular on Berkley's Pebble Bed Fluoride Salt Cooled High Temperature Reactor (PB-FHR) Mark-1 design.
+The FHR is a class of advanced nuclear reactors that combine the robust coated particle fuel form from high temperature gas cooled reactors, the direct reactor auxiliary cooling system (DRACS) passive decay heat removal of liquid metal fast reactors, and the neutronically transparent, high volumetric heat capacitance of liquid fluoride salt working fluids, e.g. Flibe, from molten salt reactors.
+This combination of fuel and coolant enables FHRs to operate in a high-temperature low-pressure design space that has beneficial safety and economic implications.
+In 2012, UC Berkeley was charged with developing a pre-conceptual design of a commercial prototype FHR -- the PB-FHR \cite{cisneros2014technical}.
+The Mark 1 design of the PB-FHR (Mk1 PB-FHR) is a 236 MWt Flibe cooled pebble bed nuclear heat source that drives an open-air Brayton combined-cycle power conversion system.
+The PB-FHR's pebble bed consists of an enriched uranium fuel core surrounded by an inert graphite pebble region that shields the outer solid graphite region, core barrel and reactor vessel.
+The fuel reaches an average burnup of 178000 MWt-d/MT.
+The Mk1 PB-FHR exhibits strong negative temperature reactivity feedback from the fuel, graphite moderator and the Flibe coolant, but a small positive temperature reactivity feedback of the inner region and from the outer graphite pebble region.
+Pebble bed reactors are in a sense the prime candidate for the sort of analysis described above.
 
-FHR pebble beds in particular are comprised of hundreds of thousands of pebbles, and a CFD-grade detailed description of the flowfield through these pebbles for an entire reactor core is not practical with current simulation technology. However, as this report will demonstrate we have a credible pathway toward a full core high-fidelity CFD capability in this geometry.
+FHR pebble beds in particular are comprised of hundreds of thousands of pebbles, and a CFD-grade detailed description of the flow field through these pebbles for an entire reactor core is not practical with current simulation technology.
+However, as this report will demonstrate we have a credible pathway toward a full core high-fidelity CFD capability in this geometry.
 
-For practical, fast-running, design-related purposes porous media formulations are usually employed. However, simple porous media approximations are often incapable of capturing key details of the flow field such as the wall channeling effect due to the change in porosity in the proximity of the vessel walls.  Advanced formulations for the ``engineering scale'' have the potential to address these issues but data from finer scale simulations is needed to build closure relationships. Pronghorn is the platform of the center of excellence for engineering scale thermal- fluids simulations. Finally, finer scale calculations are needed to establish local temperature peaking and fuel temperatures.
+For practical, fast-running, design-related purposes porous media formulations are usually employed.
+However, simple porous media approximations are often incapable of capturing key details of the flow field such as the wall channeling effect due to the change in porosity in proximity of the vessel walls.
+Advanced formulations for ``engineering scale'' simulations have the potential to address these issues but data from finer scale simulations is needed to build closure relationships.
+Pronghorn is the platform of the Center of Excellence for engineering scale thermal-fluids simulations.
+Finally, finer scale calculations are needed to establish local temperature peaking and fuel temperatures.
 
-An overall multi-physics strategy for FHR simulation might look like in Figure 1. SAM, the system analysis tool for systems analysis of advanced reactors with coolants in the liquid phase, drives the simulation of the engineering scale tools (Pronghorn and Rattlesnake/Mammoth). The lower length-scale tools can be run concurrently to provide dynamic closures for the engineering scale or offline to produce correlations (which would be more likely). The lower length-scale simulator may comprise neutronics (e.g., OpenMC), thermal-fluids (Nek5000-NekRS) and fuel performance (BISON).
+An overall multi-physics strategy for an FHR simulation might look like in Figure 1.
+SAM, the NEAMS tool for systems analysis of advanced reactors with coolants in the liquid phase, drives the simulation of the engineering scale tools (Pronghorn and Rattlesnake/Mammoth).
+The lower length-scale tools can be run concurrently to provide dynamic closures for the engineering scale or offline to produce correlations (which would be more likely).
+The lower length-scale simulator may comprise neutronics (e.g., OpenMC), thermal-fluids (Nek5000-NekRS) and fuel performance (BISON).
 
-Cardinal is the tool developed in the center of excellence for lower length-scale simulation. This new platform tightly couples all three physics and leverages advances in MOOSE \cite{gaston2009moose} such as the MultiApp system and the concept of MOOSE-wrapped Apps. Moreover it is designed from the ground-up to scale on massively parallel architectures and perform well on world-class super-computing architectures. Initial efforts in the development of the Cardinal were presented in a recent report \cite{cardinal}.
+Cardinal is the tool developed in the Center of Excellence for lower length-scale simulation.
+This new platform tightly couples all three physics and leverages advances in MOOSE \cite{gaston2009moose} such as the MultiApp system and the concept of MOOSE-wrapped Apps.
+Moreover it is designed from the ground-up to scale on massively parallel architectures and perform well on world-class super-computing architectures.
+Initial efforts in the development of Cardinal were presented in a recent report \cite{cardinal}.
 
-In this report we provide a major update to the high fidelity modeling of FHR pebble beds. A particular effort of this year's efforts have been to transition to a hybrid GPU-CPU model to leverage the potential of pre-exascale supercomputer architectures (i.e., Summit).
+In this report we provide a major update to the high fidelity modeling of FHR pebble beds.
+A particular result of this year's efforts have been to transition to a hybrid GPU-CPU model to leverage the potential of pre-exascale supercomputer architectures (i.e., Summit).
 
 In particular, we:
 \begin{itemize}
-\item Summarize some of the previous work conducted with Cardinal (Section 2);
-\item Provide an extension of Cardinal to work on GPU-based system (Section 3), this part includes the creation of a new API to NekRS \cite{toward}; the new GPU port of Nek5000, and it includes  verification of the coupling to MOOSE;
-\item Discuss the introduction of mesh-based tallies in OpenMC (Section 4) and the introduction of mesh-tally transfer with Cardinal;
-\item Discuss a set of demo simulations (Section 5) related to an FHR comprising 1568 pebbles (10x what previously done with Cardinal), providing a pathway toward full core simulations.
+\item Summarize some of the previous work conducted with Cardinal (\autoref{s:cardinal});
+\item Provide an extension of Cardinal to work on GPU-based systems (\autoref{s:nrs}), this part includes the creation of a new API to NekRS \cite{toward}-- the new GPU port of Nek5000 -- and it includes  verification of the coupling to MOOSE;
+\item Discuss the introduction of mesh-based tallies in OpenMC (\autoref{s:openmc_tallies}) and the introduction of mesh-tally transfer with Cardinal;
+\item Discuss a set of demo simulations (\autoref{s:demo}) related to an FHR comprising 1568 pebbles (10x what previously done with Cardinal), providing a pathway toward full core simulations.
 \end{itemize}
 
-We emphasize the importance of the data generated with these high fidelity conjugate heat transfer simulations of pebble beds. They represent an important stepping stone for developing wall-channeling effects models for Pronghorn, and a resource for confirmatory analysis of reduced order models.
+We emphasize the importance of the data generated with these high fidelity conjugate heat transfer simulations of pebble beds.
+They represent an important stepping stone for developing wall-channeling effect models for Pronghorn, and a resource for confirmatory analysis of reduced order models.

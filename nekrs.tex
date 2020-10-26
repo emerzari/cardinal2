@@ -1,25 +1,38 @@
 \section{Extension to NekRS}
 \label{s:nrs}
 
-A good portion of the work on Cardinal this year has been the extension of Cardinal to the use of GPUs. The primary reason for this effort is to eventually exploit the potential of pre-exascale and exascale systems.
-All such systems in the United States will involve CPU-GPU hybrids. The simulation of a pebble bed reactor core using computational fluid dynamics resolving every pebble requires such computational power.
+A good portion of the work on Cardinal this year has been the extension of Cardinal to the use of GPUs. The primary reason for this effort is to exploit the potential of pre-exascale and exascale systems.
+All such systems in the United States will involve CPU-GPU hybrids. 
+A CFD simulation of a pebble bed reactor core which resolves every pebble requires such computational power.
 
 \subsection{NekRS}
 
-NekRS is a new GPU-oriented version of Nek5000, while it is also capable of running on CPUs. It represents a significant redesign of the code, with major differences. It is primarily written in C++, but it also links to Nek5000 as a library for pre-processing and post-processing. It has been built primarily under the auspices of the Exascale Computing Program. It is able to reach excellent weak scaling performance. For example, we discuss here NekRS weak-scaling studies performed on Summit at the Oak Ridge Leadership Computing Facility (OLCF), the fastest supercomputer in the world as of June 2020, using NekRS. Table~\ref{wscaling} shows the solution times, parallel efficiency, and number of points per rank for the Summit results.
+NekRS is a new GPU-oriented version of Nek5000 that is also capable of running on CPUs.
+It represents a significant redesign of the code, with major differences.
+It is primarily written in C++, but it also links to Nek5000 as a library for pre- and post-processing.
+It has been built primarily under the auspices of the Exascale Computing Program.
+It is able to reach excellent weak scaling performance.
+For example, weak-scaling studies performed on Summit at the Oak Ridge Leadership Computing Facility (OLCF), the fastest supercomputer in the world as of June 2020, using NekRS are discussed here.
+\autoref{wscaling} shows the solution times, parallel efficiency, and number of points per rank for the Summit results.
 
 %% NOTE 1: Please check 100 time steps from where to where (we normally use 101-200 steps, averaged timings, taking out the first 100 steps)
 %% NOTE 2: 90 seconds seems realatively large.. while we get normally  ~0.5 sec.
 %% NOTE 3: We use DoF as EN^3 (Paul's convention) but the table is using DOF= E(N+1)^3...   
-We observe in Table~\ref{wscaling} near-perfect weak-scaling performance up to 2,048 nodes using 8,000 spectral elements per GPU with a polynomial order  $N=7$. The case considered is the DNS of Taylor-Green vortex flow with a triple periodic domain. We measured timings for 100 time steps; using six GPUs on 2,048 nodes the runtime was 90 seconds. 
+We observe in \autoref{wscaling} near-perfect weak-scaling performance up to 2,048 nodes using 8,000 spectral elements per GPU with a polynomial order  $N=7$.
+The case considered is DNS for a Taylor-Green vortex flow in a triple periodic domain. 
+Timings for 100 time steps were measured.
+Using six GPUs on 2,048 nodes the runtime was 90 seconds. 
 %% NOTE 4: For now, I left a simple statement as below for strong scale. Will edit further once we decide how much we want to say.
-We note that the performance falls off for GPUs when decreasing the degree of freedom (DOF) per GPU.  
+It is noted that the performance falls off for GPUs when decreasing the degree of freedom (DOF) per GPU.  
 %%Therefore, strong-scaling studies are not particularly meaningful. 
 %%Future large scale calculations will likely suffer from even longer runtimes. 
 These performance results are in keeping with earlier performance analysis presented in \cite{fischer15,min2015a}.
 
 \begin{table} [!b]
-\begin{center} \begin{tabular}{ccc}
+\centering
+\caption{Weak-scaling on Summit. 8,000 spectral elements per GPU and $N=7$.}
+\label{wscaling}
+\begin{tabular}{ccc}
 \toprule
 \# of Nodes on Summit & DOF (billion) &  Efficiency on GPUs \\
 \midrule
@@ -27,37 +40,48 @@ These performance results are in keeping with earlier performance analysis prese
  512  & 12.6 & 0.92  \\
  1024 & 25.2 & 0.88  \\
  2048 & 50.3 & 0.88 \\
-\bottomrule \end{tabular} \end{center}
-\caption{\label{wscaling} Weak-scaling on Summit. 8,000 spectral elements per GPU and $N=7$.}
+\bottomrule \end{tabular}
 \end{table}
 
-We also compare the GPU performance of NekRS with the CPU performance of Nek5000 using 1,024 nodes on Summit. The CPU simulation was performed with 42 MPI ranks per node, and the GPU simulation was performed with 6 GPUs  per node. Overall the NekRS GPU solver was 11.5 $\times$ faster than the standard Nek5000 CPU solver for the same number of nodes.
-
-We note that NekRS shares a similar verification and validation basis with Nek5000.
+The GPU performance of NekRS is also compared with the CPU performance of Nek5000 using 1,024 nodes on Summit.
+The CPU simulation was performed with 42 MPI ranks per node and the GPU simulation was performed with 6 GPUs per node.
+Overall the NekRS GPU solver was 11.5 $\times$ faster than the standard Nek5000 CPU solver for the same number of nodes.
+It is worth noting that NekRS shares a similar verification and validation basis with Nek5000.
 
 \subsection{Updates to Cardinal}
 
-The first step has been to create a NekRS branch. This branch has an updated build system that replaces Nek5000 with NekRS. The build system has been tested on various computing systems (Summit, Sawtooth, Workstations on MCS and Macbook laptops) and has been found to be robust.
+The first step to integrating NekRS into Cardinal has been to create a dedicated  branch. 
+This branch has an updated build system that replaces Nek5000 with NekRS. 
+The build system has been tested on various computing systems (Summit, Sawtooth, Workstations on MCS and Macbook laptops) and has been found to be robust.
 
-The second step has been to create an API between NekRS and MOOSE. The interface mimics closely the one with Nek5000 and in fact relies on the same Fortran routines for consistency. However additional steps had to be introduced to rely on the very different code structure of NekRS. The updated interface has been tested on the single pebble problem discussed in Section~\ref{s:cardinal}. The results of the verification are discussed in Section~\ref{s:nrs1}.
+The second step has been to create an API between NekRS and MOOSE.
+The interface closely mimics the Nek5000 API and in fact relies on the same Fortran routines for consistency.
+However, additional steps had to be introduced to rely on the very different code structure of NekRS.
+The updated interface has been tested on the single pebble problem discussed in \autoref{s:cardinal}.
+The results of the verification are discussed in \autoref{s:nrs1}.
 
-The Fortran routines find and list all mesh elements (quadrilateral surface elements) on the surface of the pebble mesh. The quadrilateral data can be linear (built on one quad for each NekRS quad) or quadratic (built on four quads for each NekRS quad). MOOSE then constructs the transfer mesh, which be distributed or serialized, based on the quadrilateral data. Data for temperature and heat flux are passed between NekRS and MOOSE on the transfer mesh.
+The Fortran routines find and list all mesh elements (quadrilateral surface elements) on the surface of the pebble mesh.
+The quadrilateral data can be linear (built on one quad for each NekRS quad) or quadratic (built on four quads for each NekRS quad).
+MOOSE then constructs the transfer mesh, which can be distributed or serialized, based on the quadrilateral data.
+Data for temperature and heat flux are passed between NekRS and MOOSE on the transfer mesh.
 
 \subsection{Verification}
 \label{s:nrs1}
 
-The results for the NekRS branch of Cardinal are discussed in the following. The case setup is indentical to the one used for the verification of the MOOSE-Nek5000 coupling. Some results for the temperature distribution are shown in Figure~\ref{f:nrs1}.
+The results for the NekRS branch of Cardinal are discussed in the following.
+The case setup is identical to the one used for the verification of the MOOSE-Nek5000 coupling.
+Some results for the temperature distribution are shown in \autoref{f:nrs1}.
 
-\begin{figure}[!h]
+\begin{figure}[htb!]
 \centering
 \includegraphics[clip=true,width=0.9\textwidth]{Figures/nrs_vv1}
 \caption{Verification test - Single pebble result. a) 3D temperature distribution in the whole domain. b) Cross section at $y=0.016 m$.}
 \label{f:nrs1}
 \end{figure}
 
-Figure~\ref{f:nrs2} presents a comparison between single pebble results in Cardinal versus results obtained in Nek5000 stand-alone with a conjugate heat transfer mesh. Temperature profiles are compared on a line at $y=0.016 m$ and $x=0 m$ (we note that the domain is centered at the pebble center and the pebble diameter is $D=0.03 m$). We note that the results are nearly identical if a quadratic representation of the surface is employed.
+\autoref{f:nrs2} presents a comparison between single pebble results in Cardinal versus results obtained in Nek5000 stand-alone with a conjugate heat transfer mesh. Temperature profiles are compared on a line at $y=0.016 m$ and $x=0 m$ (we note that the domain is centered at the pebble center and the pebble diameter is $D=0.03 m$). We note that the results are nearly identical if a quadratic representation of the surface is employed.
 
-\begin{figure}[!h]
+\begin{figure}[htb!]
 \centering
 \includegraphics[clip=true,width=0.9\textwidth]{Figures/nrs_vv2}
 \caption{Verification test - Single pebble comparison with standalone Nek5000 results. }
