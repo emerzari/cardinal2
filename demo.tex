@@ -83,7 +83,7 @@ The temperature at time zero has been set to $300\degree$C everywhere.
 The simulations took 2.5s per coupled time step on 20 nodes, requiring transfer between physics at each time step.
 However, this could be greatly optimized by relaxing the requirement, as data transfer from GPU to CPU should be minimized as much as possible.
 
-\begin{figure}[htb!]
+\begin{figure}[t!]
 \centering
 \includegraphics[clip=true,width=0.9\textwidth]{Figures/ndemo_r3}
 \caption{NekRS results for the velocity field.}
@@ -108,7 +108,7 @@ This reflects the uniform heat source applied in that region.
 An asymmetry can be seen in the profile generated from the unstructured mesh heat source, indicating that the improved spatial resolution of the source has an impact on the temperature distribution in the solid.
 This will in turn affect the resulting heat transfer to the fluid.
 
-\begin{figure}[htb!]
+\begin{figure}[t!]
 \centering
 \includegraphics[clip=true,width=0.48\textwidth]{Figures/openmc_cell_heat_source}
 \includegraphics[clip=true,width=0.48\textwidth]{Figures/openmc_mesh_heat_source}
